@@ -71,10 +71,13 @@ solar-challenge-week1/
 │
 ├── scripts/                   # Utility scripts
 │   ├── __init__.py
-│   └── README.md
+│   ├── README.md
+│   └── example_oo_usage.py   # OO patterns demonstration
 │
-├── src/                       # Source code modules
-│   └── __init__.py
+├── src/                       # Source code modules (OO patterns)
+│   ├── __init__.py
+│   ├── data_analyzer.py      # OO data analysis classes
+│   └── visualizer.py         # OO visualization classes
 │
 ├── tests/                     # Test files
 │   └── __init__.py
@@ -91,7 +94,9 @@ solar-challenge-week1/
 ├── REPORT_TEMPLATE.md         # Project report template
 ├── TIME_MANAGEMENT_LOG.md     # Time management log
 ├── REPORT_GUIDE.md            # Report preparation guide
-└── SUBMISSION_MAPPING.md      # Submission mapping guide
+├── SUBMISSION_MAPPING.md      # Submission mapping guide
+├── INTERIM_REPORT_TASKS_1_2.md # Interim report for Tasks 1 & 2
+└── PR_WORKFLOW.md             # Pull request workflow documentation
 ```
 
 ---
@@ -261,15 +266,64 @@ Check the "Actions" tab in the GitHub repository to view CI pipeline runs.
 
 ---
 
+## Object-Oriented Design
+
+The project implements explicit OO patterns for data analysis:
+
+### OO Classes
+
+1. **`SolarDataAnalyzer`** - Main data analysis class
+   - Encapsulates data loading, cleaning, and analysis
+   - Methods: `load_data()`, `get_summary_statistics()`, `analyze_missing_values()`, `detect_outliers()`, `clean_data()`
+
+2. **`DataQualityAssessor`** - Data quality assessment
+   - Implements Strategy pattern for quality metrics
+   - Methods: `assess_completeness()`, `get_quality_score()`
+
+3. **`CorrelationAnalyzer`** - Correlation analysis
+   - Implements Strategy pattern for correlation methods
+   - Methods: `analyze_correlations()`, `get_strong_correlations()`
+
+4. **Visualization Classes** - Base and specialized visualizers
+   - `BaseVisualizer`: Template Method pattern
+   - `TimeSeriesVisualizer`, `CorrelationVisualizer`, `DistributionVisualizer`: Inheritance pattern
+
+### Design Patterns Used
+
+- **Template Method**: `BaseVisualizer` defines skeleton algorithm
+- **Strategy**: Different analysis strategies (correlation, quality)
+- **Encapsulation**: Data and methods within classes
+- **Inheritance**: Specialized visualizers inherit from base
+
+### Example Usage
+
+See `scripts/example_oo_usage.py` for demonstration of OO patterns.
+
+---
+
 ## Git Workflow
 
-### Branch Structure
+### Branch Structure (Consistent Naming)
 
 - `main`: Main development branch
 - `setup-task`: Initial project setup
 - `eda-benin`: Benin EDA development
 - `eda-sierraleone`: Sierra Leone EDA development
-- `eda-sogo`: Togo EDA development
+- `eda-togo`: Togo EDA development
+
+**Naming Convention**: `eda-<country>` for all country branches
+
+### Pull Request Workflow
+
+This project uses **PR-based collaboration**:
+
+1. Create feature branch: `git checkout -b eda-benin`
+2. Develop and commit changes
+3. Push to remote: `git push origin eda-benin`
+4. Create Pull Request on GitHub
+5. Review and merge after CI/CD passes
+
+See `PR_WORKFLOW.md` for detailed PR workflow documentation.
 
 ### Common Commands
 
@@ -278,7 +332,7 @@ Check the "Actions" tab in the GitHub repository to view CI pipeline runs.
 git branch
 
 # Create and switch to new branch
-git checkout -b feature-branch
+git checkout -b eda-benin
 
 # Stage changes
 git add .
@@ -287,7 +341,10 @@ git add .
 git commit -m "feat: description of changes"
 
 # Push to remote
-git push origin branch-name
+git push origin eda-benin
+
+# Create PR (via GitHub web interface or CLI)
+gh pr create --title "feat: Add Benin EDA" --body "Description"
 ```
 
 ---
