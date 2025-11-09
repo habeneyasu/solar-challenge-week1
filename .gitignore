@@ -11,7 +11,8 @@ data/
 
 # Jupyter
 .ipynb_checkpoints/
-# Allow notebooks in notebooks/ directory
+# Allow notebooks in notebooks/ directory (must come before general rule)
+!notebooks/
 !notebooks/*.ipynb
 *.ipynb
 
