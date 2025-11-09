@@ -11,6 +11,8 @@ data/
 
 # Jupyter
 .ipynb_checkpoints/
+# Allow notebooks in notebooks/ directory
+!notebooks/*.ipynb
 *.ipynb
 
 # Python
